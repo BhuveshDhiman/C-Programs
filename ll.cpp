@@ -123,6 +123,30 @@ node *reverseRecursive(node *&head)
     return newHead;
 }
 
+node *reversek(node *&head, int k) // Time complexity O(n)
+{
+    node *prev = NULL;
+    node *curr = head;
+    node *next;
+    int count = 0;
+
+    while (curr != NULL && count < k)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        count++;
+    }
+
+    if (next != NULL)
+    {
+        head->next = reversek(next, k);
+    }
+
+    return prev;
+}
+
 int main()
 {
 
@@ -132,16 +156,21 @@ int main()
     insertAtTail(head, 3);
     insertAtTail(head, 4);
     insertAtTail(head, 5);
+    insertAtTail(head, 6);
 
-    insertAtHead(head, 0);
+    // insertAtHead(head, 0);
 
     // cout << search(head, 1) << "\n";
 
     // deletion(head, 3);
     // deleteAtHead(head);
-    display(head);
+    // display(head);
     // node *newHead = reverse(head);
-    node *newHead = reverseRecursive(head);
+    // node *newHead = reverseRecursive(head);
+    // display(newHead);
+
+    int k = 2;
+    node *newHead = reversek(head, k);
     display(newHead);
 
     return 0;
