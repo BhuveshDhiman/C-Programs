@@ -45,10 +45,11 @@ void display(node *head)
     node *temp = head;
     while (temp != NULL)
     {
-        cout << temp->data << " ";
+        cout << temp->data << " -> ";
         temp = temp->next;
     }
-    cout << "\n";
+
+    cout << " NULL\n";
 }
 
 bool search(node *head, int key)
@@ -183,6 +184,28 @@ void makeCycle(node *&head, int pos)
     temp->next = startNode;
 }
 
+void removeCycle(node *&head)
+{
+    node *slow = head;
+    node *fast = head;
+
+    do
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+    } while (slow != fast);
+
+    fast = head;
+    while (slow->next != fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    slow->next = NULL;
+}
+
 int main()
 {
 
@@ -208,8 +231,10 @@ int main()
     // int k = 2;
     // node *newHead = reversek(head, k);
     makeCycle(head, 3);
-    cout << detectCycle(head);
-    // display(head);
+    // cout << detectCycle(head);
+    removeCycle(head);
+    cout << detectCycle(head) << "\n";
+    display(head);
 
     return 0;
 }
