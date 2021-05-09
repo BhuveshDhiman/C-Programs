@@ -147,6 +147,42 @@ node *reversek(node *&head, int k) // Time complexity O(n)
     return prev;
 }
 
+bool detectCycle(node *head)
+{
+    node *slow = head;
+    node *fast = head;
+
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void makeCycle(node *&head, int pos)
+{
+    node *temp = head;
+    node *startNode;
+
+    int count = 1;
+    while (temp->next != NULL)
+    {
+        if (count == pos)
+        {
+            startNode = temp;
+        }
+        temp = temp->next;
+        count++;
+    }
+    temp->next = startNode;
+}
+
 int main()
 {
 
@@ -169,9 +205,11 @@ int main()
     // node *newHead = reverseRecursive(head);
     // display(newHead);
 
-    int k = 2;
-    node *newHead = reversek(head, k);
-    display(newHead);
+    // int k = 2;
+    // node *newHead = reversek(head, k);
+    makeCycle(head, 3);
+    cout << detectCycle(head);
+    // display(head);
 
     return 0;
 }
