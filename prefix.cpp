@@ -11,7 +11,7 @@ int prefixEvaluation(string s)
     {
         if (s[i] >= '0' && s[i] <= '9')
         {
-            st.push(s[i] - '0');
+            st.push(s[i] - '0'); // Convert character to integer - we are subtracting ascii value of 0 from s[i]
         }
         else
         {
