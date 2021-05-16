@@ -3,6 +3,7 @@
 #include <math.h>
 using namespace std;
 
+// Time complexity O(l), where l is the length of the string
 int prefixEvaluation(string s)
 {
     stack<int> st;
